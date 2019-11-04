@@ -5,16 +5,9 @@ const express = require("express"),
 /* GET home page. */
 router.get("/", async (req, res, next) => {
     const parkList = await ParksModel.getAll();
+    console.log('session', req.session);
 
-    res.render("template", {
-        locals: {
-            title: "Time to shred bruh!",
-            parkData: parkList
-        },
-        partials: {
-            partial: "partial-index"
-        }
-    });
+    res.status(200).json(parkList);
 });
 
 router.get("/:park_id", async (req, res, next) => {
@@ -24,7 +17,9 @@ router.get("/:park_id", async (req, res, next) => {
     res.render("template", {
         locals: {
             title: "This is one park",
-            parkData: thePark
+            parkData: thePark,
+            isLoggedIn: req.session.is_logged_in,
+            firstName: req.session.first_name
         },
         partials: {
             partial: "partial-single-park"

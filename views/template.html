@@ -10,7 +10,33 @@
         <link rel="stylesheet" href="./stylesheets/style.css">
     </head>
     <body>
-        <h1 class="container">${title}</h1>
+        <section class="hero is-dark bold">
+                <div class="hero-body">
+                    <div class="container">
+                    <h1 class="title">
+                        ${title}
+                    </h1>
+                    <h2 class="subtitle">
+                        ${!!isLoggedIn ? `
+                            Welcome, ${firstName}!
+                            ` : `
+                            <i>(not logged in)</i>
+                        `}
+                    </h2>
+                    </div>
+                    <nav class="menu--main">
+                            <ul>
+                                ${!!isLoggedIn ? `
+                                    <li><a href="/users/logout">Logout</a></li>
+                                    ` : `
+                                    <li><a href="/users/login">Login</a></li>
+                                    <li></li><a href="/users/signup">Signup</a></li>
+                                `}
+                            </ul>
+                        </nav>
+                </div>
+                </section>
+        <hr>
         <main class="container">${partial}</main>
     </body>
 </html>
